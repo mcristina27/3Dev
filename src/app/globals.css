@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ── Tipografía ── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans:    var(--font-dm-sans);   /* fuente base de toda la web */
+  --font-display: var(--font-dm-sans);   /* headlines */
+  --font-nunito:  var(--font-nunito);    /* disponible como alternativa */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Paleta 3Dev — tonos cálidos ── */
+@theme {
+  --color-primary:      #5E7B9B;   /* Rackley — botones, accents   */
+  --color-primary-dark: #6E2E34;   /* Puce Red — texto principal   */
+  --color-primary-mid:  #B46C72;   /* Rose Gold — badges, bordes   */
+  --color-primary-soft: #FFC8CB;   /* Light Pink — fondos tenues   */
+  --color-cream:        #F5E6D1;   /* Champagne — fondo hero       */
+
+  --color-surface:      #FAF2EA;   /* champagne claro — fondo base */
+  --color-ink:          #6E2E34;   /* Puce Red — texto principal   */
+  --color-ink-muted:    #B46C72;   /* Rose Gold — texto secundario */
+}
+
+/* ── Animación ticker ── */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Animación slider de cards ── */
+@keyframes slider-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Pausa al hacer hover sobre el slider ── */
+.catalog-slider-wrapper:hover .catalog-slider-track {
+  animation-play-state: paused;
+}
+
+/* ── Background gradient animation — orbes ── */
+@keyframes moveHorizontal {
+  0%   { transform: translateX(-50%) translateY(-10%); }
+  50%  { transform: translateX(50%)  translateY(10%);  }
+  100% { transform: translateX(-50%) translateY(-10%); }
+}
+@keyframes moveInCircle {
+  0%   { transform: rotate(0deg);   }
+  50%  { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes moveVertical {
+  0%   { transform: translateY(-50%); }
+  50%  { transform: translateY(50%);  }
+  100% { transform: translateY(-50%); }
+}
+
+@theme {
+  --animate-first:  moveVertical   30s ease            infinite;
+  --animate-second: moveInCircle   20s reverse         infinite;
+  --animate-third:  moveInCircle   40s linear          infinite;
+  --animate-fourth: moveHorizontal 40s ease            infinite;
+  --animate-fifth:  moveInCircle   20s ease            infinite;
+}
+
+/* ── Reset base ── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #F5E6D1;
+    color: var(--color-ink);
+    font-family: var(--font-dm-sans), var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-primary-mid);
+    color: white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Variables CSS para componentes shadcn ── */
+@layer base {
+  :root {
+    --background:        245 230 209;   /* champagne */
+    --foreground:        110 46 52;     /* puce red  */
+    --muted:             245 230 209;
+    --muted-foreground:  180 108 114;
+    --popover:           255 255 255;
+    --popover-foreground:110 46 52;
+    --border:            180 108 114 / 0.28;
+    --input:             180 108 114 / 0.28;
+    --ring:              94 123 155;
+    --accent:            245 230 209;
+    --accent-foreground: 110 46 52;
+  }
 }
