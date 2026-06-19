@@ -1,129 +1,125 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
-import Button from "@/components/ui/Button";
-import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
-import { Typewriter } from "@/components/ui/typewriter";
-import { GlassFilter, GlassButton } from "@/components/ui/liquid-glass";
-import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { ArrowRight, Star } from "lucide-react";
+import { Model3DViewer } from "@/components/ui/Model3DViewer";
 
-/* ── Entrada suave ── */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fade = (delay = 0): any => ({
-  initial:    { opacity: 0, y: 22 },
-  animate:    { opacity: 1, y: 0  },
-  transition: { duration: 0.7, delay, ease: "easeOut" },
-});
-
-/* Palabras que rotan en el typewriter */
-const WORDS = [
-  "developers",
-  "makers",
-  "diseñadoras",
-  "techlovers",
-  "builders",
-  "creators",
-  "gamers",
-];
+const tags = ["🎨 Personalizable", "⚡ 24h", "📦 Lima delivery", "♻️ Eco filament"];
 
 export default function Hero() {
   return (
-    <BackgroundGradientAnimation
-      containerClassName="min-h-screen"
-      firstColor   ="255, 225, 227"   /* pink muy claro         */
-      secondColor  ="225, 170, 174"   /* rose gold aclarado     */
-      thirdColor   ="200, 140, 148"   /* puce suavizado         */
-      fourthColor  ="252, 243, 234"   /* champagne casi blanco  */
-      fifthColor   ="255, 218, 221"   /* pink suave             */
-      pointerColor ="220, 158, 165"   /* rose gold suave        */
-      blendingValue="soft-light"
-      size="60%"
-      interactive={true}
+    <section
+      className="relative min-h-screen bg-white flex flex-col"
+      style={{ borderBottom: "2px solid #0A0A0A" }}
     >
-      <section
-        className="relative flex flex-col items-center justify-center min-h-screen px-6"
-        style={{ paddingTop: "120px", paddingBottom: "80px" }}
+      {/* Top yellow band */}
+      <div
+        className="w-full flex items-center justify-center gap-8 py-2 overflow-hidden"
+        style={{ borderBottom: "2px solid #0A0A0A", background: "#FFE500" }}
       >
-        <GlassFilter />
+        {[...tags, ...tags].map((t, i) => (
+          <span key={i} className="text-xs font-bold text-[#0A0A0A] whitespace-nowrap flex items-center gap-2">
+            {t} <span className="opacity-40">✦</span>
+          </span>
+        ))}
+      </div>
 
-        <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center gap-8">
+      {/* Main grid */}
+      <div className="flex-1 max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
 
-          {/* ── Headline con Typewriter ── */}
-          <motion.div {...fade(0.2)} className="flex flex-col items-center gap-0 w-full">
-
-            {/* Línea 1 */}
-            <p
-              className="leading-none tracking-tight font-light"
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "clamp(3rem, 8.5vw, 7rem)",
-                color: "#6E2E34",
-                opacity: 0.9,
-              }}
-            >
-              Impresiones 3D
-            </p>
-
-            {/* Línea 2 */}
-            <p
-              className="leading-none tracking-tight font-extralight"
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "clamp(3rem, 8.5vw, 7rem)",
-                color: "#B46C72",
-                opacity: 0.80,
-              }}
-            >
-              inspiradas en
-            </p>
-
-            {/* Línea 3 — typewriter */}
-            <div
-              className="leading-none tracking-tight font-light"
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "clamp(3rem, 8.5vw, 7rem)",
-              }}
-            >
-              <Typewriter
-                text={WORDS}
-                speed={65}
-                deleteSpeed={35}
-                waitTime={1800}
-                cursorChar="_"
-                cursorClassName="ml-0.5"
-                className="font-light"
-                style={{ color: "#6E2E34" }}
-              />
-            </div>
+        {/* Left — Text */}
+        <div className="flex flex-col gap-8 py-16 lg:pr-12">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 w-fit px-4 py-1.5 rounded-full text-xs font-bold"
+            style={{ border: "2px solid #0A0A0A", background: "#FFE500" }}
+          >
+            <Star size={11} fill="#0A0A0A" />
+            Impresión 3D en Lima, Perú
           </motion.div>
 
-          {/* Subtítulo */}
-          <motion.p {...fade(0.4)}
-            className="max-w-md text-base md:text-lg leading-relaxed"
-            style={{
-              color: "#B46C72",
-              fontFamily: "var(--font-nunito)",
-              fontWeight: 500,
-            }}
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] text-[#0A0A0A]"
           >
-            Figuras decorativas, piezas funcionales y diseños a medida.{" "}
-            <span style={{ fontWeight: 700, color: "#6E2E34" }}>Precisión de 0.1 mm</span>,
-            materiales premium, envíos a todo el país.
+            Tus ideas,
+            <br />
+            <span
+              className="inline-block px-3 -mx-1 rounded-lg"
+              style={{ background: "#FFE500" }}
+            >
+              impresas
+            </span>
+            <br />
+            en 3D. ✦
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="text-base font-medium text-[#555] max-w-sm leading-relaxed"
+          >
+            Figuras, decoración y piezas a medida.
+            Todo hecho en Lima.
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div {...fade(0.52)} className="flex flex-col sm:flex-row items-center gap-4">
-            <LiquidButton size="lg">
-              Ver catálogo
-            </LiquidButton>
-            <LiquidButton size="lg">
-              Cotizar mi pieza
-            </LiquidButton>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="flex items-center gap-3 flex-wrap"
+          >
+            <Link
+              href="/catalogo"
+              className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-[#0A0A0A] hover:bg-[#FFE500] hover:text-[#0A0A0A] transition-all"
+              style={{ border: "2px solid #0A0A0A" }}
+            >
+              Ver productos <ArrowRight size={15} />
+            </Link>
+            <Link
+              href="/#contacto"
+              className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white transition-all"
+              style={{ border: "2px solid #0A0A0A" }}
+            >
+              Cotizar pieza
+            </Link>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex items-center gap-8 pt-2"
+          >
+            {[["200+", "Piezas"], ["48h", "Entrega"], ["100%", "A medida"]].map(([num, label]) => (
+              <div key={label} className="flex flex-col">
+                <span className="text-2xl font-bold text-[#0A0A0A]">{num}</span>
+                <span className="text-xs font-medium text-[#555]">{label}</span>
+              </div>
+            ))}
           </motion.div>
         </div>
-      </section>
-    </BackgroundGradientAnimation>
+
+        {/* Right — 3D model */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex items-center justify-center py-8 lg:py-0"
+          style={{ minHeight: 520 }}
+        >
+          <Model3DViewer src="/models/obj4.glb" height={520} />
+        </motion.div>
+      </div>
+    </section>
   );
 }

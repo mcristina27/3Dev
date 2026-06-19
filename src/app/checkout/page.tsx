@@ -101,7 +101,7 @@ function Field({
   label, icon: Icon, type = "text", value, onChange, required, placeholder, children,
 }: {
   label: string;
-  icon?: React.ElementType;
+  icon?: React.ElementType<{ size?: number; className?: string; style?: React.CSSProperties }>;
   type?: string;
   value?: string;
   onChange?: (v: string) => void;
@@ -121,7 +121,7 @@ function Field({
           border:     "1px solid rgba(180,108,114,0.25)",
         }}
       >
-        {Icon && <Icon size={15} style={{ color: "#B46C72", flexShrink: 0 }} />}
+        {Icon && <Icon size={15} className="shrink-0" style={{ color: "#B46C72" }} />}
         {children ?? (
           <input
             type={type}

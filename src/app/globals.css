@@ -2,22 +2,24 @@
 
 /* ── Tipografía ── */
 @theme inline {
-  --font-sans:    var(--font-dm-sans);   /* fuente base de toda la web */
-  --font-display: var(--font-dm-sans);   /* headlines */
-  --font-nunito:  var(--font-nunito);    /* disponible como alternativa */
+  --font-sans:    var(--font-space);
+  --font-display: var(--font-space);
 }
 
-/* ── Paleta 3Dev — tonos cálidos ── */
+/* ── Paleta nueva: blanco + negro + acentos ── */
 @theme {
-  --color-primary:      #5E7B9B;   /* Rackley — botones, accents   */
-  --color-primary-dark: #6E2E34;   /* Puce Red — texto principal   */
-  --color-primary-mid:  #B46C72;   /* Rose Gold — badges, bordes   */
-  --color-primary-soft: #FFC8CB;   /* Light Pink — fondos tenues   */
-  --color-cream:        #F5E6D1;   /* Champagne — fondo hero       */
+  --color-ink:        #0A0A0A;
+  --color-ink-muted:  #555555;
+  --color-surface:    #FFFFFF;
+  --color-border:     #0A0A0A;
 
-  --color-surface:      #FAF2EA;   /* champagne claro — fondo base */
-  --color-ink:          #6E2E34;   /* Puce Red — texto principal   */
-  --color-ink-muted:    #B46C72;   /* Rose Gold — texto secundario */
+  /* Acentos de hover de cards */
+  --color-yellow:     #FFE500;
+  --color-coral:      #FF4F4F;
+  --color-blue:       #3B82F6;
+  --color-mint:       #34D399;
+  --color-purple:     #A78BFA;
+  --color-orange:     #FB923C;
 }
 
 /* ── Animación ticker ── */
@@ -37,7 +39,7 @@
   animation-play-state: paused;
 }
 
-/* ── Background gradient animation — orbes ── */
+/* ── Animaciones orbes (se mantienen por si se usan) ── */
 @keyframes moveHorizontal {
   0%   { transform: translateX(-50%) translateY(-10%); }
   50%  { transform: translateX(50%)  translateY(10%);  }
@@ -55,12 +57,19 @@
 }
 
 @theme {
-  --animate-first:  moveVertical   30s ease            infinite;
-  --animate-second: moveInCircle   20s reverse         infinite;
-  --animate-third:  moveInCircle   40s linear          infinite;
-  --animate-fourth: moveHorizontal 40s ease            infinite;
-  --animate-fifth:  moveInCircle   20s ease            infinite;
+  --animate-first:  moveVertical   30s ease   infinite;
+  --animate-second: moveInCircle   20s reverse infinite;
+  --animate-third:  moveInCircle   40s linear  infinite;
+  --animate-fourth: moveHorizontal 40s ease    infinite;
+  --animate-fifth:  moveInCircle   20s ease    infinite;
 }
+
+/* ── Float animation para modelos 3D ── */
+@keyframes float-model {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+.float-model { animation: float-model 4s ease-in-out infinite; }
 
 /* ── Reset base ── */
 @layer base {
@@ -69,32 +78,44 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background-color: #F5E6D1;
-    color: var(--color-ink);
-    font-family: var(--font-dm-sans), var(--font-sans), system-ui, sans-serif;
+    background-color: #FFFFFF;
+    color: #0A0A0A;
+    font-family: var(--font-space), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
   ::selection {
-    background: var(--color-primary-mid);
-    color: white;
+    background: #FFE500;
+    color: #0A0A0A;
   }
 }
 
-/* ── Variables CSS para componentes shadcn ── */
+/* ── Variables CSS para shadcn ── */
 @layer base {
   :root {
-    --background:        245 230 209;   /* champagne */
-    --foreground:        110 46 52;     /* puce red  */
-    --muted:             245 230 209;
-    --muted-foreground:  180 108 114;
+    --background:        255 255 255;
+    --foreground:        10 10 10;
+    --muted:             245 245 245;
+    --muted-foreground:  85 85 85;
     --popover:           255 255 255;
-    --popover-foreground:110 46 52;
-    --border:            180 108 114 / 0.28;
-    --input:             180 108 114 / 0.28;
-    --ring:              94 123 155;
-    --accent:            245 230 209;
-    --accent-foreground: 110 46 52;
+    --popover-foreground:10 10 10;
+    --border:            10 10 10;
+    --input:             10 10 10 / 0.20;
+    --ring:              10 10 10;
+    --accent:            255 229 0;
+    --accent-foreground: 10 10 10;
   }
+}
+
+/* ── Card con borde negro estilo editorial ── */
+.card-bordered {
+  border: 2px solid #0A0A0A;
+  border-radius: 16px;
+  background: white;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-bordered:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0px #0A0A0A;
 }

@@ -5,106 +5,167 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, X, ShoppingBag,
   MessageCircle,
-  ChevronDown, Clock, Ruler, Package2,
-  ArrowLeft, Palette,
+  ChevronRight, Clock, Ruler, Package2,
+  ArrowRight, Palette,
 } from "lucide-react";
 import Link from "next/link";
 import { Navbar3Dev } from "@/components/ui/navbar-3dev";
-import { GlowCard } from "@/components/ui/spotlight-card";
 import Footer from "@/components/layout/Footer";
 import {
   ALL_PRODUCTS,
   ACTIVE_CATEGORIES,
+  CATEGORIES,
   type Product,
 } from "@/data/products";
 
-/* Chips de categoría: "Todos" + las categorías activas */
+/* ── Helpers ─────────────────────────────────────────── */
 const FILTER_OPTIONS = [
-  { id: "todos", label: "Todos" },
-  ...ACTIVE_CATEGORIES.map((c) => ({ id: c.id, label: c.label })),
+  { id: "todos", label: "Todos", emoji: "✦" },
+  ...ACTIVE_CATEGORIES.map((c) => ({ id: c.id, label: c.label, emoji: c.emoji })),
 ];
 
-/* ─────────────────────────────────────────────
-   COMPONENTE CARD
-───────────────────────────────────────────── */
+const HOVER_COLORS = [
+  "#FFE500", "#FF4F4F", "#3B82F6", "#34D399",
+  "#A78BFA", "#FB923C", "#F472B6", "#4ADE80",
+  "#FFE500", "#FF4F4F", "#3B82F6", "#34D399",
+  "#A78BFA", "#FB923C",
+];
+
+const getCategoryLabel = (id: string) =>
+  CATEGORIES.find((c) => c.id === id)?.label ?? id;
+
+/* ─────────────────────────────────────────────────────────
+   CARD
+───────────────────────────────────────────────────────── */
 function ProductCard({
   product,
   selected,
   onClick,
+  index,
 }: {
   product: Product;
   selected: boolean;
   onClick: () => void;
+  index: number;
 }) {
+  const [hovered, setHovered] = useState(false);
+  const color = HOVER_COLORS[index % HOVER_COLORS.length];
+  const isActive = selected || hovered;
+
   return (
-    <button className="text-left w-full" onClick={onClick}>
-      <GlowCard
-        className={`w-full flex flex-col cursor-pointer transition-all duration-200 ${
-          selected ? "ring-2 ring-offset-2" : ""
-        }`}
+    <button className="text-left w-full h-full" onClick={onClick}>
+      <div
+        className="flex flex-col rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 h-full"
+        style={{
+          border: selected ? `3px solid #0A0A0A` : "2px solid #0A0A0A",
+          background: isActive ? color : "#FFFFFF",
+          boxShadow: isActive ? "4px 4px 0px #0A0A0A" : "2px 2px 0px transparent",
+          transform: isActive ? "translateY(-4px)" : "translateY(0)",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
-        {/* Imagen placeholder */}
+        {/* Imagen */}
         <div
           className="w-full flex items-center justify-center relative overflow-hidden"
           style={{
-            height: "160px",
-            background: selected
-              ? "linear-gradient(135deg, rgba(255,200,203,0.35), rgba(180,108,114,0.20))"
-              : "linear-gradient(135deg, rgba(255,200,203,0.18), rgba(180,108,114,0.08))",
-            borderBottom: "1px solid rgba(180,108,114,0.12)",
-            transition: "background 0.3s",
+            height: 200,
+            background: "#F5F5F5",
+            borderBottom: "2px solid #0A0A0A",
           }}
         >
-          <motion.div animate={{ y: selected ? -3 : 0 }} transition={{ duration: 0.3 }}>
-            <ShoppingBag
-              size={40}
-              strokeWidth={1.3}
-              style={{ color: selected ? "#B46C72" : "#FFC8CB" }}
+          {product.images[0] ? (
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-cover"
             />
-          </motion.div>
+          ) : (
+            <ShoppingBag
+              size={46}
+              strokeWidth={1.3}
+              style={{ color: isActive ? "#0A0A0A" : "#D0D0D0" }}
+            />
+          )}
+
+          {/* Badge precio */}
+          {product.price ? (
+            <span
+              className="absolute top-3 left-3 text-xs font-black px-2.5 py-1 rounded-full"
+              style={{
+                background: isActive ? "#0A0A0A" : "#FFE500",
+                color: isActive ? color : "#0A0A0A",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              S/ {product.price}
+            </span>
+          ) : (
+            <span
+              className="absolute top-3 left-3 text-xs font-black px-2.5 py-1 rounded-full"
+              style={{
+                background: "#0A0A0A",
+                color: isActive ? color : "#FFE500",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              Cotizar
+            </span>
+          )}
+
+          {/* Indicador seleccionado */}
           {selected && (
             <div
-              className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center"
-              style={{ background: "#B46C72" }}
+              className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center"
+              style={{ background: "#0A0A0A" }}
             >
-              <ChevronDown size={14} color="white" />
+              <ChevronRight size={14} color={color} />
             </div>
           )}
         </div>
 
         {/* Info */}
-        <div className="flex flex-col gap-1.5 p-4 flex-1">
-          <span className="text-[10px] font-black tracking-widest uppercase" style={{ color: "#FFC8CB" }}>
-            {product.category}
+        <div className="flex flex-col gap-1 p-4 flex-1">
+          <span
+            className="text-[10px] font-black tracking-widest uppercase"
+            style={{ color: isActive ? "rgba(0,0,0,0.5)" : "#999" }}
+          >
+            {getCategoryLabel(product.category)}
           </span>
-          <h3 className="font-black text-sm leading-tight" style={{ color: "#6E2E34" }}>
+          <h3 className="font-bold text-[15px] leading-tight text-[#0A0A0A]">
             {product.name}
           </h3>
+          <p
+            className="text-xs font-medium leading-relaxed line-clamp-2 mt-0.5"
+            style={{ color: isActive ? "rgba(0,0,0,0.65)" : "#777" }}
+          >
+            {product.shortDesc}
+          </p>
         </div>
 
         {/* Footer */}
         <div
           className="px-4 py-3 flex items-center justify-between"
-          style={{ borderTop: "1px solid rgba(110,46,52,0.08)" }}
+          style={{ borderTop: "2px solid #0A0A0A" }}
         >
-          <span className="text-xs font-bold" style={{ color: "#5E7B9B" }}>
-            {product.price ? `S/ ${product.price}` : "Cotizar"}
+          <span className="text-xs font-bold text-[#0A0A0A]">
+            {selected ? "Ver menos ↑" : "Ver detalle →"}
           </span>
           <span
-            className="text-[10px] font-bold px-2.5 py-1 rounded-full"
-            style={{ background: "rgba(255,200,203,0.22)", color: "#5E7B9B" }}
+            className="text-[10px] font-black px-2.5 py-1 rounded-full"
+            style={{ background: "#0A0A0A", color: isActive ? color : "#FFE500" }}
           >
             {product.tag}
           </span>
         </div>
-      </GlowCard>
+      </div>
     </button>
   );
 }
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────
    PANEL DE DETALLE
-───────────────────────────────────────────── */
+───────────────────────────────────────────────────────── */
 function DetailPanel({
   product,
   onClose,
@@ -117,140 +178,143 @@ function DetailPanel({
   );
   const waUrl = `https://wa.me/51999999999?text=${waMessage}`;
 
+  const specs = [
+    { icon: Package2, label: "Material", value: product.material },
+    { icon: Ruler, label: "Tamaño", value: product.size },
+    { icon: Clock, label: "Entrega", value: product.time },
+    { icon: Palette, label: "Peso", value: product.weight },
+  ];
+
   return (
     <div
-      className="relative rounded-3xl overflow-hidden"
-      style={{
-        background: "rgba(255,255,255,0.78)",
-        backdropFilter: "blur(24px)",
-        WebkitBackdropFilter: "blur(24px)",
-        border: "1px solid rgba(180,108,114,0.22)",
-        boxShadow: "0 8px 48px rgba(110,46,52,0.10)",
-      }}
+      className="rounded-2xl overflow-hidden"
+      style={{ border: "2px solid #0A0A0A", background: "#FFFFFF" }}
     >
-      {/* Cerrar */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-        style={{ background: "rgba(110,46,52,0.08)", color: "#B46C72" }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(110,46,52,0.16)")}
-        onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(110,46,52,0.08)")}
+      {/* Barra superior con cierre */}
+      <div
+        className="flex items-center justify-between px-5 py-3"
+        style={{ borderBottom: "2px solid #0A0A0A", background: "#F5F5F5" }}
       >
-        <X size={15} />
-      </button>
+        <span className="text-xs font-black uppercase tracking-widest text-[#999]">
+          ✦
+        </span>
+        <button
+          onClick={onClose}
+          className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[#0A0A0A] hover:bg-[#FFE500] transition-colors"
+          style={{ border: "2px solid #0A0A0A" }}
+        >
+          <X size={14} />
+        </button>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+      <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Imagen */}
         <div
-          className="flex items-center justify-center min-h-[220px] md:min-h-[320px]"
+          className="flex items-center justify-center min-h-[240px] md:min-h-[320px]"
           style={{
-            background: "linear-gradient(135deg, rgba(255,200,203,0.25), rgba(180,108,114,0.12))",
-            borderRight: "1px solid rgba(180,108,114,0.10)",
+            background: "#FAFAFA",
+            borderRight: "2px solid #0A0A0A",
           }}
         >
-          <motion.div
-            animate={{ y: [-5, 5, -5] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ShoppingBag size={72} strokeWidth={1.1} style={{ color: "#FFC8CB" }} />
-          </motion.div>
-          {/* TODO: <Image src={product.image} ... /> */}
+          {product.images[0] ? (
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <motion.div
+              animate={{ y: [-5, 5, -5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ShoppingBag size={80} strokeWidth={1.1} style={{ color: "#D0D0D0" }} />
+            </motion.div>
+          )}
         </div>
 
-        {/* Info */}
+        {/* Información */}
         <div className="flex flex-col gap-5 p-7">
           {/* Encabezado */}
           <div>
-            <span
-              className="text-[10px] font-black tracking-widest uppercase"
-              style={{ color: "#FFC8CB" }}
-            >
-              {product.category}
+            <span className="text-[10px] font-black tracking-widest uppercase text-[#999]">
+              {getCategoryLabel(product.category)}
             </span>
-            <h2 className="font-black text-2xl mt-1 leading-tight" style={{ color: "#6E2E34" }}>
+            <h2 className="font-bold text-2xl sm:text-3xl mt-1 leading-tight text-[#0A0A0A]">
               {product.name}
             </h2>
-            <p className="text-sm leading-relaxed mt-2 font-medium" style={{ color: "#B46C72" }}>
+            <p className="text-sm leading-relaxed mt-2 text-[#555]">
               {product.description}
             </p>
           </div>
 
           {/* Specs */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[
-              { icon: Package2, label: "Material", value: product.material },
-              { icon: Ruler,    label: "Tamaño",   value: product.size     },
-              { icon: Clock,    label: "Entrega",  value: product.time     },
-              { icon: Palette,  label: "Peso",     value: product.weight   },
-            ].map(({ icon: Icon, label, value }) => (
+          <div className="grid grid-cols-2 gap-2">
+            {specs.map(({ icon: Icon, label, value }) => (
               <div
                 key={label}
                 className="flex flex-col gap-1 p-3 rounded-xl"
-                style={{
-                  background: "rgba(245,230,209,0.60)",
-                  border: "1px solid rgba(180,108,114,0.15)",
-                }}
+                style={{ border: "2px solid #0A0A0A", background: "#FAFAFA" }}
               >
-                <Icon size={13} style={{ color: "#B46C72" }} />
-                <span className="text-[10px] font-black tracking-wide uppercase" style={{ color: "#B46C72" }}>
+                <Icon size={13} className="text-[#0A0A0A]" />
+                <span className="text-[10px] font-black tracking-wide uppercase text-[#999]">
                   {label}
                 </span>
-                <span className="text-xs font-bold leading-tight" style={{ color: "#6E2E34" }}>
+                <span className="text-xs font-bold leading-tight text-[#0A0A0A]">
                   {value}
                 </span>
               </div>
             ))}
           </div>
 
-          {/* Colores disponibles */}
-          {product.colors.length > 0 && product.colors[0] !== "A consultar" && product.colors[0] !== "A elegir" && (
-            <div>
-              <p className="text-[10px] font-black tracking-wide uppercase mb-2" style={{ color: "#B46C72" }}>
-                Colores disponibles
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {product.colors.map((color) => (
-                  <span
-                    key={color}
-                    className="text-xs font-semibold px-2.5 py-1 rounded-full"
-                    style={{
-                      background: "rgba(245,230,209,0.80)",
-                      border: "1px solid rgba(180,108,114,0.20)",
-                      color: "#6E2E34",
-                    }}
-                  >
-                    {color}
-                  </span>
-                ))}
+          {/* Colores */}
+          {product.colors.length > 0 &&
+            product.colors[0] !== "A consultar" &&
+            product.colors[0] !== "A elegir" && (
+              <div>
+                <p className="text-[10px] font-black tracking-wide uppercase text-[#999] mb-2">
+                  Colores disponibles
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {product.colors.map((color) => (
+                    <span
+                      key={color}
+                      className="text-xs font-semibold px-2.5 py-1 rounded-full text-[#0A0A0A]"
+                      style={{ border: "1.5px solid #0A0A0A", background: "#FAFAFA" }}
+                    >
+                      {color}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Precio + cantidad */}
-          <div className="flex items-center justify-between gap-4">
+          {/* Precio */}
+          <div
+            className="rounded-xl p-4 flex items-center justify-between"
+            style={{ border: "2px solid #0A0A0A", background: "#FFE500" }}
+          >
             <div>
-              <p className="text-xs font-semibold" style={{ color: "rgba(110,46,52,0.50)" }}>
+              <p className="text-[10px] font-black uppercase tracking-widest text-[#0A0A0A]/60">
                 Precio por unidad
               </p>
-              <p className="font-black text-3xl mt-0.5" style={{ color: "#6E2E34" }}>
+              <p className="font-bold text-3xl text-[#0A0A0A]">
                 {product.price ? `S/ ${product.price}` : "A cotizar"}
               </p>
             </div>
-
+            <span className="text-2xl">✦</span>
           </div>
 
-          {/* CTA WhatsApp */}
+          {/* WhatsApp CTA */}
           <motion.a
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.01 }}
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2.5 py-3.5 rounded-full font-black text-sm"
+            className="flex items-center justify-center gap-2.5 py-4 rounded-full font-black text-sm text-white"
             style={{
               background: "linear-gradient(135deg, #25D366, #1DA851)",
-              color: "white",
-              boxShadow: "0 4px 20px rgba(37,211,102,0.35)",
+              boxShadow: "0 4px 20px rgba(37,211,102,0.30)",
             }}
           >
             <MessageCircle size={18} />
@@ -264,17 +328,16 @@ function DetailPanel({
   );
 }
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────
    HOOK — columnas según viewport
-   Debe coincidir con grid-cols-2 sm:grid-cols-3 lg:grid-cols-4
-───────────────────────────────────────────── */
+───────────────────────────────────────────────────────── */
 function useColumns() {
   const [cols, setCols] = useState(4);
   useEffect(() => {
     const update = () => {
-      if      (window.innerWidth >= 1024) setCols(4);
-      else if (window.innerWidth >= 640)  setCols(3);
-      else                                setCols(2);
+      if (window.innerWidth >= 1024) setCols(4);
+      else if (window.innerWidth >= 640) setCols(3);
+      else setCols(2);
     };
     update();
     window.addEventListener("resize", update);
@@ -283,30 +346,31 @@ function useColumns() {
   return cols;
 }
 
-/* ─────────────────────────────────────────────
-   PÁGINA PRINCIPAL
-───────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   PÁGINA
+───────────────────────────────────────────────────────── */
 export default function CatalogoPage() {
-  const [search,   setSearch]   = useState("");
+  const [search, setSearch] = useState("");
   const [category, setCategory] = useState("todos");
   const [selected, setSelected] = useState<Product | null>(null);
-  const panelRef  = useRef<HTMLDivElement>(null);
-  const cols      = useColumns();
+  const panelRef = useRef<HTMLDivElement>(null);
+  const cols = useColumns();
 
   /* Filtrado */
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     return ALL_PRODUCTS.filter((p) => {
-      const matchCat  = category === "todos" || p.category === category;
-      const matchName = !q
-        || p.name.toLowerCase().includes(q)
-        || p.category.toLowerCase().includes(q)
-        || p.searchTags.some((t) => t.includes(q));
+      const matchCat = category === "todos" || p.category === category;
+      const matchName =
+        !q ||
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.searchTags.some((t) => t.includes(q));
       return matchCat && matchName;
     });
   }, [search, category]);
 
-  /* Filas para insertar el panel inline */
+  /* Filas para el panel inline */
   const rows = useMemo(() => {
     const result: Product[][] = [];
     for (let i = 0; i < filtered.length; i += cols) {
@@ -315,12 +379,10 @@ export default function CatalogoPage() {
     return result;
   }, [filtered, cols]);
 
-  /* Seleccionar / deseleccionar */
   function handleSelect(p: Product) {
     setSelected((prev) => (prev?.id === p.id ? null : p));
   }
 
-  /* Scroll al panel cuando se abre */
   useEffect(() => {
     if (!selected) return;
     const timer = setTimeout(() => {
@@ -329,7 +391,6 @@ export default function CatalogoPage() {
     return () => clearTimeout(timer);
   }, [selected?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /* Si el seleccionado desaparece por filtro, cerrar */
   useEffect(() => {
     if (selected && !filtered.find((p) => p.id === selected.id)) {
       setSelected(null);
@@ -337,100 +398,134 @@ export default function CatalogoPage() {
   }, [filtered, selected]);
 
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: "linear-gradient(180deg, #FAF0E8 0%, #F5E6D1 100%)" }}
-    >
+    <div className="min-h-screen bg-white">
       <Navbar3Dev />
 
-      {/* ── Hero de la página ── */}
-      <div className="pt-32 pb-10 px-6 text-center">
+      {/* ── Hero editorial ── */}
+      <div
+        className="pt-28 pb-12 px-6 max-w-6xl mx-auto"
+        style={{ borderBottom: "2px solid #0A0A0A" }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-xs font-black uppercase tracking-widest text-[#999] mb-4">
+            3Dev ✦ Lima, Perú
+          </p>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#0A0A0A] leading-[1.05]">
+              Nuestro{" "}
+              <span
+                className="inline-block px-3 -mx-1 rounded-xl"
+                style={{ background: "#FFE500" }}
+              >
+                catálogo.
+              </span>
+            </h1>
+            <p className="text-sm font-medium text-[#555] leading-relaxed sm:text-right">
+              A medida. Entrega en Lima.
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       {/* ── Buscador + filtros ── */}
-      <div className="max-w-6xl mx-auto px-6 mb-10 flex flex-col gap-5">
+      <div className="max-w-6xl mx-auto px-6 pt-10 pb-6 flex flex-col gap-5">
 
         {/* Search */}
-        <div
-          className="flex items-center gap-3 px-4 py-3 rounded-2xl"
-          style={{
-            background: "rgba(255,255,255,0.70)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            border: "1px solid rgba(180,108,114,0.22)",
-            boxShadow: "0 2px 16px rgba(110,46,52,0.06)",
-          }}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white"
+          style={{ border: "2px solid #0A0A0A" }}
         >
-          <Search size={17} style={{ color: "#B46C72", flexShrink: 0 }} />
+          <Search size={17} className="text-[#0A0A0A] shrink-0" />
           <input
             type="text"
-            placeholder="Buscar producto..."
+            placeholder="Buscar..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-sm font-semibold placeholder:font-normal"
-            style={{ color: "#6E2E34" }}
+            className="flex-1 bg-transparent outline-none text-sm font-semibold text-[#0A0A0A] placeholder:text-[#BBB] placeholder:font-normal"
           />
           {search && (
-            <button onClick={() => setSearch("")} style={{ color: "#B46C72" }}>
+            <button
+              onClick={() => setSearch("")}
+              className="text-[#0A0A0A] hover:text-[#FF4F4F] transition-colors"
+            >
               <X size={15} />
             </button>
           )}
-        </div>
+        </motion.div>
 
-        {/* Category chips */}
-        <div className="flex flex-wrap gap-2">
+        {/* Chips de categoría */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="flex flex-wrap gap-2"
+        >
           {FILTER_OPTIONS.map((opt) => {
             const active = category === opt.id;
             return (
               <motion.button
                 key={opt.id}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setCategory(opt.id)}
-                className="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200"
+                onClick={() => { setCategory(opt.id); setSelected(null); }}
+                className="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-150"
                 style={{
-                  background: active
-                    ? "linear-gradient(135deg, #7B9EBF, #5E7B9B)"
-                    : "rgba(255,255,255,0.65)",
-                  color:      active ? "white" : "#6E2E34",
-                  border:     active ? "none" : "1px solid rgba(180,108,114,0.28)",
-                  boxShadow:  active ? "0 4px 12px rgba(94,123,155,0.25)" : "none",
+                  background: active ? "#FFE500" : "#FFFFFF",
+                  color: "#0A0A0A",
+                  border: "2px solid #0A0A0A",
+                  boxShadow: active ? "2px 2px 0px #0A0A0A" : "none",
+                  transform: active ? "translateY(-1px)" : "none",
                 }}
               >
-                {opt.label}
+                {opt.emoji} {opt.label}
               </motion.button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Contador */}
-        <p className="text-xs font-semibold" style={{ color: "rgba(110,46,52,0.45)" }}>
-          {filtered.length} {filtered.length === 1 ? "producto" : "productos"} encontrados
+        <p className="text-xs font-semibold text-[#999]">
+          {filtered.length} {filtered.length === 1 ? "producto" : "productos"}
         </p>
       </div>
 
       {/* ── Grid de productos ── */}
-      <div className="max-w-6xl mx-auto px-6 pb-8">
+      <div className="max-w-6xl mx-auto px-6 pb-16">
         {filtered.length === 0 ? (
           <div className="text-center py-20">
-            <ShoppingBag size={48} strokeWidth={1.2} className="mx-auto mb-4" style={{ color: "#FFC8CB" }} />
-            <p className="font-bold text-sm" style={{ color: "#B46C72" }}>
-              No encontramos resultados para &ldquo;{search}&rdquo;
+            <div
+              className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5"
+              style={{ border: "2px solid #0A0A0A", background: "#F5F5F5" }}
+            >
+              <ShoppingBag size={36} strokeWidth={1.3} className="text-[#CCC]" />
+            </div>
+            <p className="font-bold text-base text-[#0A0A0A]">
+              No encontramos &ldquo;{search}&rdquo;
+            </p>
+            <p className="text-sm text-[#999] mt-1">
+              Probá con otro término o limpiá los filtros.
             </p>
             <button
-              onClick={() => { setSearch(""); setCategory("Todos"); }}
-              className="mt-3 text-xs font-bold underline"
-              style={{ color: "#5E7B9B" }}
+              onClick={() => { setSearch(""); setCategory("todos"); }}
+              className="mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold text-[#0A0A0A] hover:bg-[#FFE500] transition-colors"
+              style={{ border: "2px solid #0A0A0A" }}
             >
-              Limpiar filtros
+              Limpiar filtros <ArrowRight size={12} />
             </button>
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {rows.map((row, rowIdx) => {
-              const rowHasSelected = selected !== null && row.some((p) => p.id === selected.id);
+              const rowHasSelected =
+                selected !== null && row.some((p) => p.id === selected.id);
               return (
                 <React.Fragment key={rowIdx}>
-                  {/* Cards de esta fila */}
                   {row.map((p) => (
                     <motion.div
                       key={p.id}
@@ -439,16 +534,18 @@ export default function CatalogoPage() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.22 }}
+                      className="h-full"
                     >
                       <ProductCard
                         product={p}
                         selected={selected?.id === p.id}
                         onClick={() => handleSelect(p)}
+                        index={ALL_PRODUCTS.findIndex((x) => x.id === p.id)}
                       />
                     </motion.div>
                   ))}
 
-                  {/* Panel de detalle — se abre justo debajo de la fila */}
+                  {/* Panel inline debajo de la fila */}
                   <AnimatePresence>
                     {rowHasSelected && (
                       <motion.div
@@ -479,9 +576,29 @@ export default function CatalogoPage() {
         )}
       </div>
 
-      <div className="mt-10">
-        <Footer />
+      {/* ── CTA band antes del footer ── */}
+      <div
+        className="bg-[#FFE500] px-6 py-12 text-center"
+        style={{ borderTop: "2px solid #0A0A0A", borderBottom: "2px solid #0A0A0A" }}
+      >
+        <p className="text-xs font-black uppercase tracking-widest text-[#0A0A0A]/50 mb-3">
+          ¿No lo encontrás?
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-[#0A0A0A] mb-6">
+          Lo hacemos. ✦
+        </h2>
+        <a
+          href="https://wa.me/51999999999?text=Hola!+Quiero+cotizar+una+pieza+3D+personalizada"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold bg-[#0A0A0A] text-[#FFE500] hover:bg-white hover:text-[#0A0A0A] transition-colors"
+          style={{ border: "2px solid #0A0A0A" }}
+        >
+          <MessageCircle size={16} /> Consultar por WhatsApp
+        </a>
       </div>
+
+      <Footer />
     </div>
   );
 }

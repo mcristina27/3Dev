@@ -1,21 +1,13 @@
 import type { Metadata } from "next";
-import { Nunito, DM_Sans } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
-import CartDrawer from "@/components/ui/CartDrawer";
 
-const nunito = Nunito({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-nunito",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-/* DM Sans — para el headline hero: thin, elegante, legible */
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["200", "300", "400", "500"],
+  variable: "--font-space",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -31,12 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${nunito.variable} ${dmSans.variable} antialiased`}>
-      <body className="min-h-screen">
+    <html lang="es" className={`${spaceGrotesk.variable} antialiased`}>
+      <body className="min-h-screen bg-white">
         <CartProvider>
-          <CartDrawer />
           {children}
         </CartProvider>
+        <Script
+          type="module"
+          src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
