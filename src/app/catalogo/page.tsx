@@ -67,9 +67,8 @@ function ProductCard({
       >
         {/* Imagen */}
         <div
-          className="w-full flex items-center justify-center relative overflow-hidden"
+          className="w-full aspect-square relative overflow-hidden flex items-center justify-center"
           style={{
-            height: 200,
             background: "#F5F5F5",
             borderBottom: "2px solid #0A0A0A",
           }}
@@ -78,7 +77,7 @@ function ProductCard({
             <img
               src={product.images[0]}
               alt={product.name}
-              className="w-full h-full object-contain p-2"
+              className="w-full h-full object-cover"
             />
           ) : (
             <ShoppingBag
