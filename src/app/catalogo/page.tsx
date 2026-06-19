@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, X, ShoppingBag,
   MessageCircle,
-  ChevronRight, Clock, Ruler, Package2,
-  ArrowRight, Palette,
+  ChevronRight,
+  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 import { Navbar3Dev } from "@/components/ui/navbar-3dev";
@@ -177,13 +177,6 @@ function DetailPanel({
   );
   const waUrl = `https://wa.me/51999999999?text=${waMessage}`;
 
-  const specs = [
-    { icon: Package2, label: "Material", value: product.material },
-    { icon: Ruler, label: "Tamaño", value: product.size },
-    { icon: Clock, label: "Entrega", value: product.time },
-    { icon: Palette, label: "Peso", value: product.weight },
-  ];
-
   return (
     <div
       className="rounded-2xl overflow-hidden"
@@ -244,25 +237,6 @@ function DetailPanel({
             <p className="text-sm leading-relaxed mt-2 text-[#555]">
               {product.description}
             </p>
-          </div>
-
-          {/* Specs */}
-          <div className="grid grid-cols-2 gap-2">
-            {specs.map(({ icon: Icon, label, value }) => (
-              <div
-                key={label}
-                className="flex flex-col gap-1 p-3 rounded-xl"
-                style={{ border: "2px solid #0A0A0A", background: "#FAFAFA" }}
-              >
-                <Icon size={13} className="text-[#0A0A0A]" />
-                <span className="text-[10px] font-black tracking-wide uppercase text-[#999]">
-                  {label}
-                </span>
-                <span className="text-xs font-bold leading-tight text-[#0A0A0A]">
-                  {value}
-                </span>
-              </div>
-            ))}
           </div>
 
           {/* Colores */}
