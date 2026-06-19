@@ -520,7 +520,7 @@ export default function CatalogoPage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {rows.map((row, rowIdx) => {
               const rowHasSelected =
                 selected !== null && row.some((p) => p.id === selected.id);
