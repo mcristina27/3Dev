@@ -305,12 +305,12 @@ function DetailPanel({
    HOOK — columnas según viewport
 ───────────────────────────────────────────────────────── */
 function useColumns() {
-  const [cols, setCols] = useState(4);
+  const [cols, setCols] = useState(1);
   useEffect(() => {
     const update = () => {
       if (window.innerWidth >= 1024) setCols(4);
-      else if (window.innerWidth >= 640) setCols(3);
-      else setCols(2);
+      else if (window.innerWidth >= 640) setCols(2);
+      else setCols(1);
     };
     update();
     window.addEventListener("resize", update);
