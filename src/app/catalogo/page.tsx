@@ -200,9 +200,9 @@ function DetailPanel({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2">
-        {/* Imagen */}
+        {/* Imagen — solo desktop */}
         <div
-          className="flex items-center justify-center min-h-[240px] md:min-h-[320px]"
+          className="hidden md:flex items-center justify-center md:min-h-[320px]"
           style={{
             background: "#FAFAFA",
             borderRight: "2px solid #0A0A0A",
@@ -212,7 +212,7 @@ function DetailPanel({
             <img
               src={product.images[0]}
               alt={product.name}
-              className="w-full h-full object-contain p-2"
+              className="w-full h-full object-contain p-4"
             />
           ) : (
             <motion.div
@@ -225,7 +225,7 @@ function DetailPanel({
         </div>
 
         {/* Información */}
-        <div className="flex flex-col gap-5 p-7">
+        <div className="flex flex-col gap-4 p-5 md:p-7">
           {/* Encabezado */}
           <div>
             <span className="text-[10px] font-black tracking-widest uppercase text-[#999]">
