@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -15,6 +15,13 @@ export const metadata: Metadata = {
   title: "3Dev — Impresiones 3D con Amor",
   description:
     "Tienda de impresiones 3D únicas: figuras, decoración, accesorios y más. Cada pieza hecha con amor y filamento premium.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({

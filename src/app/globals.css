@@ -22,6 +22,18 @@
   --color-orange:     #FB923C;
 }
 
+/* ── Mobile: sin zoom, sin long-press, sin callout ── */
+* {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button, a, [role="button"] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* ── Animación ticker ── */
 @keyframes ticker-scroll {
   from { transform: translateX(0); }
