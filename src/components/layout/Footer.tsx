@@ -21,7 +21,7 @@ const links = {
 
 const socials = [
   { icon: <AtSign size={16} />, label: "Instagram", href: "#" },
-  { icon: <MessageCircle size={16} />, label: "WhatsApp", href: "https://wa.me/51999999999" },
+  { icon: <MessageCircle size={16} />, label: "WhatsApp", href: "https://wa.me/51959297226" },
   { icon: <Mail size={16} />, label: "Email", href: "mailto:hola@3dev.pe" },
 ];
 
@@ -40,7 +40,7 @@ export default function Footer() {
           </span>
         </h2>
         <a
-          href="https://wa.me/51999999999?text=Hola!+Quiero+cotizar+una+pieza+3D"
+          href="https://wa.me/51959297226?text=Hola!+Quiero+cotizar+una+pieza+3D"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold bg-white text-[#0A0A0A] hover:bg-[#FFE500] transition-colors"

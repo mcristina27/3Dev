@@ -175,7 +175,7 @@ function DetailPanel({
   const waMessage = encodeURIComponent(
     `Hola! Me interesa el producto: *${product.name}*${product.price ? ` (S/ ${product.price})` : ""}. ¿Podría darme más información? 😊`
   );
-  const waUrl = `https://wa.me/51999999999?text=${waMessage}`;
+  const waUrl = `https://wa.me/51959297226?text=${waMessage}`;
 
   return (
     <div
@@ -561,7 +561,7 @@ export default function CatalogoPage() {
           Lo hacemos. ✦
         </h2>
         <a
-          href="https://wa.me/51999999999?text=Hola!+Quiero+cotizar+una+pieza+3D+personalizada"
+          href="https://wa.me/51959297226?text=Hola!+Quiero+cotizar+una+pieza+3D+personalizada"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold bg-[#0A0A0A] text-[#FFE500] hover:bg-white hover:text-[#0A0A0A] transition-colors"
