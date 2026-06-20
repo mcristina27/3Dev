@@ -87,7 +87,10 @@ button, a, [role="button"] {
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
 
   body {
     background-color: #FFFFFF;
