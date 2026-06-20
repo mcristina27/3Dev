@@ -14,7 +14,7 @@ const bullets = [
   { emoji: "🎨", text: "Colores a tu gusto" },
   { emoji: "📐", text: "Medidas exactas" },
   { emoji: "⚡", text: "Entrega 24–48h" },
-  { emoji: "🧵", text: "PLA Premium" },
+  { emoji: "🧵", text: "PLA" },
 ];
 
 export default function Feature3D() {
