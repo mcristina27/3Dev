@@ -37,7 +37,7 @@ export default function About() {
           <h2 className="font-black leading-tight tracking-tight"
             style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)", color: "#6E2E34" }}>
             Impresión 3D de precisión,{" "}
-            <span style={{ color: "#B46C72" }}>desde Lima.</span>
+            <span style={{ color: "#B46C72" }}>con precisión.</span>
           </h2>
           <p className="leading-relaxed font-semibold" style={{ color: "#B46C72" }}>
             3Dev es un estudio especializado en figuras decorativas, piezas funcionales

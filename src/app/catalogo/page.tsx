@@ -385,7 +385,7 @@ export default function CatalogoPage() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-black uppercase tracking-widest text-[#999] mb-4">
-            3Dev ✦ Lima, Perú
+            3Dev ✦ Perú
           </p>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#0A0A0A] leading-[1.05]">
@@ -398,7 +398,7 @@ export default function CatalogoPage() {
               </span>
             </h1>
             <p className="text-sm font-medium text-[#555] leading-relaxed sm:text-right">
-              A medida. Entrega en Lima.
+              A medida. Entrega a domicilio.
             </p>
           </div>
         </motion.div>

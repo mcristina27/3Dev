@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 interface Logo3DevProps {
   size?       : number;
   showText?   : boolean;
@@ -13,9 +11,9 @@ interface Logo3DevProps {
 export function Logo3Dev({
   size        = 48,
   showText    = false,
-  mainColor   = "#6E2E34",   // Puce Red — reemplaza el negro
-  accentColor = "#5E7B9B",   // Rackley — reemplaza el teal
-  textAccent  = "#B46C72",
+  mainColor   = "#0A0A0A",   // Negro
+  accentColor = "#FFE500",   // Amarillo marca
+  textAccent  = "#FFE500",
 }: Logo3DevProps) {
   const h = size * (108 / 80);
 

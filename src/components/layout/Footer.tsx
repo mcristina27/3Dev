@@ -20,7 +20,7 @@ const links = {
 };
 
 const socials = [
-  { icon: <AtSign size={16} />, label: "Instagram", href: "#" },
+  { icon: <AtSign size={16} />, label: "Instagram", href: "https://www.instagram.com/3dev_labs" },
   { icon: <MessageCircle size={16} />, label: "WhatsApp", href: "https://wa.me/51959297226" },
   { icon: <Mail size={16} />, label: "Email", href: "mailto:hola@3dev.pe" },
 ];
@@ -28,28 +28,6 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-[#0A0A0A] text-white">
-      {/* CTA band */}
-      <div
-        className="border-b-2 border-white/10 px-6 py-12 text-center"
-      >
-        <p className="text-xs font-black uppercase tracking-widest text-white/40 mb-4">¿Tenés una idea?</p>
-        <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-          La imprimimos{" "}
-          <span className="px-2 rounded-lg" style={{ background: "#FFE500", color: "#0A0A0A" }}>
-            juntos.
-          </span>
-        </h2>
-        <a
-          href="https://wa.me/51959297226?text=Hola!+Quiero+cotizar+una+pieza+3D"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold bg-white text-[#0A0A0A] hover:bg-[#FFE500] transition-colors"
-          style={{ border: "2px solid white" }}
-        >
-          <MessageCircle size={16} /> Escribinos por WhatsApp
-        </a>
-      </div>
-
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
@@ -60,7 +38,7 @@ export default function Footer() {
             <span className="font-bold text-lg text-white">3Dev</span>
           </Link>
           <p className="text-sm text-white/50 leading-relaxed max-w-xs">
-            Impresiones 3D únicas hechas con amor y filamento premium en Lima, Perú.
+            Impresiones 3D únicas hechas con amor y filamento premium.
             Cada pieza, pensada para vos.
           </p>
           <div className="flex items-center gap-2">
@@ -116,7 +94,7 @@ export default function Footer() {
       >
         <span>© {new Date().getFullYear()} 3Dev. Todos los derechos reservados.</span>
         <span className="flex items-center gap-1">
-          Hecho con <span className="text-[#FFE500]">♥</span> en Lima, Perú 🇵🇪
+          Hecho con <span className="text-[#FFE500]">♥</span> en Perú 🇵🇪
         </span>
       </div>
     </footer>

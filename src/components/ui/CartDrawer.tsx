@@ -183,7 +183,7 @@ export default function CartDrawer() {
                   </span>
                 </div>
                 <p className="text-xs" style={{ color: "rgba(110,46,52,0.45)" }}>
-                  Envío calculado en el checkout · Lima y provincias
+                  Envío calculado en el checkout
                 </p>
 
                 {/* CTA */}

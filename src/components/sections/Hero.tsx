@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import { Model3DViewer } from "@/components/ui/Model3DViewer";
 
-const tags = ["🎨 Personalizable", "⚡ 24h", "📦 Lima delivery", "♻️ Eco filament"];
+const tags = ["🎨 Personalizable", "⚡ 24h", "📦 Delivery", "♻️ Eco filament"];
 
 export default function Hero() {
   return (
@@ -39,7 +39,7 @@ export default function Hero() {
             style={{ border: "2px solid #0A0A0A", background: "#FFE500" }}
           >
             <Star size={11} fill="#0A0A0A" />
-            Impresión 3D en Lima, Perú
+            Impresión 3D ✦ Perú
           </motion.div>
 
           {/* Headline */}
@@ -68,7 +68,7 @@ export default function Hero() {
             className="text-base font-medium text-[#555] max-w-sm leading-relaxed"
           >
             Figuras, decoración y piezas a medida.
-            Todo hecho en Lima.
+            Todo hecho con amor.
           </motion.p>
 
           <motion.div

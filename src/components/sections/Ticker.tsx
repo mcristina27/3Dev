@@ -7,8 +7,6 @@ const items = [
   "✦",
   "A medida",
   "✦",
-  "Lima, Perú",
-  "✦",
   "PLA Premium",
   "✦",
   "0.1 mm",

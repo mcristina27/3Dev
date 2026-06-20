@@ -13,7 +13,7 @@ const Model3DViewer = dynamic(
 const bullets = [
   { emoji: "🎨", text: "Colores a tu gusto" },
   { emoji: "📐", text: "Medidas exactas" },
-  { emoji: "⚡", text: "Entrega 24–48h en Lima" },
+  { emoji: "⚡", text: "Entrega 24–48h" },
   { emoji: "♻️", text: "PLA ecológico" },
 ];
 
