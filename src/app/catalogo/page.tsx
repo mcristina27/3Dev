@@ -89,16 +89,24 @@ function ProductCard({
 
           {/* Badge precio */}
           {product.price ? (
-            <span
-              className="absolute top-3 left-3 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{
-                background: isActive ? "#0A0A0A" : "#FFE500",
-                color: isActive ? color : "#0A0A0A",
-                border: "1.5px solid #0A0A0A",
-              }}
-            >
-              S/ {product.price}
-            </span>
+            <div className="absolute top-3 left-3 flex flex-col items-start gap-0.5">
+              {product.salePrice && (
+                <span className="text-[10px] font-bold line-through px-1.5 rounded"
+                  style={{ background: "rgba(0,0,0,0.12)", color: "#0A0A0A" }}>
+                  S/ {product.price}
+                </span>
+              )}
+              <span
+                className="text-xs font-black px-2.5 py-1 rounded-full"
+                style={{
+                  background: isActive ? "#0A0A0A" : "#FFE500",
+                  color: isActive ? color : "#0A0A0A",
+                  border: "1.5px solid #0A0A0A",
+                }}
+              >
+                S/ {product.salePrice ?? product.price}
+              </span>
+            </div>
           ) : (
             <span
               className="absolute top-3 left-3 text-xs font-black px-2.5 py-1 rounded-full"
@@ -172,8 +180,9 @@ function DetailPanel({
   product: Product;
   onClose: () => void;
 }) {
+  const displayPrice = product.salePrice ?? product.price;
   const waMessage = encodeURIComponent(
-    `Hola! Me interesa el producto: *${product.name}*${product.price ? ` (S/ ${product.price})` : ""}. ¿Podría darme más información? 😊`
+    `Hola! Me interesa el producto: *${product.name}*${displayPrice ? ` (S/ ${displayPrice})` : ""}. ¿Podría darme más información? 😊`
   );
   const waUrl = `https://wa.me/51959297226?text=${waMessage}`;
 
@@ -268,11 +277,18 @@ function DetailPanel({
           >
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-[#0A0A0A]/60">
-                Precio por unidad
+                {product.salePrice ? "Precio de lanzamiento 🚀" : "Precio por unidad"}
               </p>
-              <p className="font-bold text-3xl text-[#0A0A0A]">
-                {product.price ? `S/ ${product.price}` : "A cotizar"}
-              </p>
+              {product.salePrice ? (
+                <div className="flex items-baseline gap-2">
+                  <p className="font-bold text-3xl text-[#0A0A0A]">S/ {product.salePrice}</p>
+                  <p className="font-bold text-base line-through text-[#0A0A0A]/50">S/ {product.price}</p>
+                </div>
+              ) : (
+                <p className="font-bold text-3xl text-[#0A0A0A]">
+                  {product.price ? `S/ ${product.price}` : "A cotizar"}
+                </p>
+              )}
             </div>
             <span className="text-2xl">✦</span>
           </div>

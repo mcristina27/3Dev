@@ -25,6 +25,7 @@ export interface Product {
                                // usa "/products/nombre.jpg" para imágenes propias
                                // o URLs de Unsplash mientras tanto
   price:       number | null;  // precio en soles (S/). null = "cotizar"
+  salePrice?:  number;         // precio de oferta (tachado el original)
   shortDesc:   string;         // descripción corta para la card del home
   description: string;         // descripción completa para la página de detalle
   material:    string;         // material(es) disponibles
@@ -123,6 +124,7 @@ export const ALL_PRODUCTS: Product[] = [
     category:    "clickers",
     images:      ["/assets/products/clicker-coffe.png"],
     price:       8,
+    salePrice:   7,
     shortDesc:   "Clicker con forma de taza de café. También disponible como llavero.",
     description: "Clicker articulado en forma de taza de café con espuma. Viene en versión clicker de escritorio o como llavero para llevar a todos lados.",
     material:    "PLA Premium",
@@ -141,6 +143,7 @@ export const ALL_PRODUCTS: Product[] = [
     category:    "clickers",
     images:      ["/assets/products/clicker-teclas.png"],
     price:       10,
+    salePrice:   7,
     shortDesc:   "Clicker de teclas mecánicas apilables. Para los amantes del teclado.",
     description: "Clicker con forma de teclas mecánicas que encajan entre sí. Súper satisfactorio de usar. Disponible en rosa y naranja.",
     material:    "PLA Premium",
@@ -159,6 +162,7 @@ export const ALL_PRODUCTS: Product[] = [
     category:    "clickers",
     images:      ["/assets/products/clicler-claude.png"],
     price:       8,
+    salePrice:   5,
     shortDesc:   "Clicker con forma del mascot de Claude. También viene como llavero.",
     description: "Clicker articulado con forma del mascot pixel-art de Claude. Disponible como clicker de escritorio o llavero. El regalo perfecto para devs.",
     material:    "PLA Premium",
@@ -179,6 +183,7 @@ export const ALL_PRODUCTS: Product[] = [
     category:    "accesorios",
     images:      ["/assets/products/keychain-github.png"],
     price:       5,
+    salePrice:   2,
     shortDesc:   "Llavero con el Octocat de GitHub. Blanco y negro, edición dev.",
     description: "Llavero con el icónico Octocat de GitHub en negro y blanco. Hecho en PLA bicolor. El accesorio indispensable para cualquier dev.",
     material:    "PLA Premium bicolor",

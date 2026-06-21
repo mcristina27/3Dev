@@ -3,6 +3,7 @@
   "configurations": [
     {
       "name": "3dev",
+      "cwd": "/Users/cristinaruelas/Documents/Proyectos/3dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
