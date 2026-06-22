@@ -162,7 +162,7 @@ export const ALL_PRODUCTS: Product[] = [
     category:    "clickers",
     images:      ["/assets/products/clicler-claude.png"],
     price:       8,
-    salePrice:   5,
+    salePrice:   6,
     shortDesc:   "Clicker con forma del mascot de Claude. También viene como llavero.",
     description: "Clicker articulado con forma del mascot pixel-art de Claude. Disponible como clicker de escritorio o llavero. El regalo perfecto para devs.",
     material:    "PLA Premium",
