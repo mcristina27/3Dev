@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { ALL_PRODUCTS } from "@/data/products";
-
-const SALE_PRODUCTS = ALL_PRODUCTS.filter((p) => p.salePrice);
-
 export default function LaunchPopup() {
   const [open, setOpen] = useState(false);
 
@@ -68,26 +64,13 @@ export default function LaunchPopup() {
             </div>
 
             {/* Body */}
-            <div className="bg-white px-5 py-4 flex flex-col gap-3">
-              <p className="text-sm font-medium text-[#555]">
-                Solo por lanzamiento, algunos productos tienen precio especial. ¡Aprovechalo!
+            <div className="bg-white px-5 py-5 flex flex-col gap-2">
+              <p className="text-base font-bold text-[#0A0A0A]">
+                Algunos productos tienen precios especiales por lanzamiento. 🎉
               </p>
-
-              <div className="flex flex-col gap-2">
-                {SALE_PRODUCTS.map((p) => (
-                  <div
-                    key={p.id}
-                    className="flex items-center justify-between px-4 py-2.5 rounded-xl"
-                    style={{ border: "2px solid #0A0A0A", background: "#FAFAFA" }}
-                  >
-                    <span className="text-sm font-bold text-[#0A0A0A]">{p.name}</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-base font-black text-[#0A0A0A]">S/ {p.salePrice}</span>
-                      <span className="text-xs font-medium line-through text-[#999]">S/ {p.price}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="text-sm font-medium text-[#555]">
+                Entrá al catálogo y encontrá las ofertas marcadas.
+              </p>
             </div>
 
             {/* Footer */}
