@@ -183,7 +183,7 @@ export const ALL_PRODUCTS: Product[] = [
     category:    "accesorios",
     images:      ["/assets/products/keychain-github.png"],
     price:       5,
-    salePrice:   2,
+    salePrice:   3,
     shortDesc:   "Llavero con el Octocat de GitHub. Blanco y negro, edición dev.",
     description: "Llavero con el icónico Octocat de GitHub en negro y blanco. Hecho en PLA bicolor. El accesorio indispensable para cualquier dev.",
     material:    "PLA Premium bicolor",

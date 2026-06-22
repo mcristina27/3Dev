@@ -57,13 +57,7 @@ function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number })
           )}
           {/* Price badge */}
           {p.price && (
-            <div className="absolute top-3 left-3 flex flex-col items-start gap-0.5">
-              {p.salePrice && (
-                <span className="text-[10px] font-bold line-through px-1.5 rounded"
-                  style={{ background: "rgba(0,0,0,0.12)", color: "#0A0A0A" }}>
-                  S/ {p.price}
-                </span>
-              )}
+            <div className="absolute top-3 left-3 flex items-center gap-1.5">
               <span
                 className="text-xs font-black px-2.5 py-1 rounded-full"
                 style={{
@@ -74,6 +68,12 @@ function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number })
               >
                 S/ {p.salePrice ?? p.price}
               </span>
+              {p.salePrice && (
+                <span className="text-[10px] font-bold line-through px-1.5 py-0.5 rounded"
+                  style={{ background: "rgba(0,0,0,0.10)", color: "#0A0A0A" }}>
+                  S/ {p.price}
+                </span>
+              )}
             </div>
           )}
         </div>
