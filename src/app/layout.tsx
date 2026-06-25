@@ -3,7 +3,6 @@ import { Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
-import LaunchPopup from "@/components/ui/LaunchPopup";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -35,7 +34,6 @@ export default function RootLayout({
       <body className="min-h-screen bg-white">
         <CartProvider>
           {children}
-          <LaunchPopup />
         </CartProvider>
         <Script
           type="module"
