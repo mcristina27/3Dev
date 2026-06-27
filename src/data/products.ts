@@ -174,6 +174,25 @@ export const ALL_PRODUCTS: Product[] = [
     searchTags:  ["clicker", "fidget", "claude", "anthropic", "ai", "dev", "llavero", "tech"],
   },
 
+  {
+    id:          22,
+    name:        "Clicker Cursor",
+    category:    "clickers",
+    images:      ["/assets/products/clicker-cursor.png"],
+    price:       8,
+    shortDesc:   "Llavero clicker con forma de tecla cursor. Para los devs más estilosos.",
+    description: "Llavero clicker con diseño de tecla cursor pixel-art. Marco en marrón oscuro, panel blanco con el ícono del cursor. Perfecto para llevar en las llaves o mochila.",
+    material:    "PLA",
+    colors:      ["Marrón / Blanco"],
+    size:        "4 × 4 cm",
+    weight:      "20 g",
+    time:        "3–5 días hábiles",
+    tag:         "Clicker",
+    featured:    true,
+    inStock:     true,
+    searchTags:  ["clicker", "cursor", "llavero", "tecla", "dev", "programador", "pixel"],
+  },
+
   /* ── ACCESORIOS ─────────────────────────────────────── */
   {
     id:          19,
