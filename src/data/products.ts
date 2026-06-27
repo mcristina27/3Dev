@@ -215,6 +215,26 @@ export const ALL_PRODUCTS: Product[] = [
 
   /* ── HOGAR ───────────────────────────────────────────── */
   {
+    id:          23,
+    name:        "Posavasos 3Dev",
+    category:    "hogar",
+    images:      ["/assets/products/posavasos.png"],
+    price:       50,
+    shortDesc:   "Posavasos impreso en 3D. Diseño único para tu escritorio.",
+    description: "Posavasos impreso en 3D con diseño exclusivo 3Dev. Perfecto para proteger tu escritorio con estilo. Disponible en distintos colores.",
+    material:    "PLA",
+    colors:      ["A elegir"],
+    size:        "10 × 10 cm",
+    weight:      "60 g",
+    time:        "3–5 días hábiles",
+    tag:         "Hogar",
+    featured:    true,
+    inStock:     true,
+    searchTags:  ["posavasos", "coaster", "hogar", "escritorio", "setup", "deco"],
+  },
+
+
+  {
     id:          20,
     name:        "Organizador Claude",
     category:    "hogar",
