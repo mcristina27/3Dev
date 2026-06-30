@@ -101,24 +101,6 @@ export const ALL_PRODUCTS: Product[] = [
 
   /* ── CLICKERS ───────────────────────────────────────── */
   {
-    id:          15,
-    name:        "Clicker MiniDumpling",
-    category:    "clickers",
-    images:      ["/assets/products/clicker-minidumpling.png"],
-    price:       10,
-    shortDesc:   "Clicker fidget con forma de dumpling kawaii. ¡Imposible soltarlo!",
-    description: "Clicker articulado con forma de dumpling kawaii. Mecanismo de clic satisfactorio y cesta de vapor incluida. Disponible en versión ojos abiertos o guiñando.",
-    material:    "PLA Premium",
-    colors:      ["Beige / Marrón"],
-    size:        "6 × 6 cm",
-    weight:      "40 g",
-    time:        "3–5 días hábiles",
-    tag:         "Clicker",
-    featured:    true,
-    inStock:     false,
-    searchTags:  ["clicker", "fidget", "dumpling", "kawaii", "gyoza", "cute", "juguete"],
-  },
-  {
     id:          16,
     name:        "Clicker MiniCoffee",
     category:    "clickers",
