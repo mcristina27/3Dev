@@ -55,6 +55,16 @@ function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number })
               style={{ color: hovered ? "#0A0A0A" : "#D0D0D0" }}
             />
           )}
+          {/* Sin stock overlay */}
+          {!p.inStock && (
+            <div className="absolute inset-0 flex items-center justify-center"
+              style={{ background: "rgba(255,255,255,0.75)" }}>
+              <span className="text-xs font-black px-3 py-1.5 rounded-full"
+                style={{ background: "#0A0A0A", color: "#FFE500", border: "2px solid #0A0A0A" }}>
+                No disponible
+              </span>
+            </div>
+          )}
           {/* Price badge */}
           {p.price && (
             <div className="absolute top-3 left-3 flex items-center gap-1.5">

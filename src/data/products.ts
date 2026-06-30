@@ -115,7 +115,7 @@ export const ALL_PRODUCTS: Product[] = [
     time:        "3–5 días hábiles",
     tag:         "Clicker",
     featured:    true,
-    inStock:     true,
+    inStock:     false,
     searchTags:  ["clicker", "fidget", "dumpling", "kawaii", "gyoza", "cute", "juguete"],
   },
   {
