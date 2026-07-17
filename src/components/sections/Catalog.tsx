@@ -65,19 +65,6 @@ function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number })
               </span>
             </div>
           )}
-          {/* Código interno */}
-          {p.code && (
-            <span
-              className="absolute top-3 left-3 text-[10px] font-black px-2 py-1 rounded-full"
-              style={{
-                background: "rgba(255,255,255,0.9)",
-                color: "#0A0A0A",
-                border: "1.5px solid #0A0A0A",
-              }}
-            >
-              #{p.code}
-            </span>
-          )}
           {/* Price badge */}
           {p.price ? (
             <span
