@@ -37,6 +37,7 @@ export interface Product {
   featured:    boolean;        // true = aparece en el slider de la home
   inStock:     boolean;        // false = muestra "Sin stock" en vez de precio
   searchTags:  string[];       // palabras clave para el buscador (sin tildes ok)
+  hidden?:     boolean;        // true = no se muestra en la tienda (pero queda en el código)
 }
 
 /* ── Categorías ─────────────────────────────────────────── */
@@ -97,7 +98,7 @@ export const CATEGORIES: Category[] = [
   },
 ];
 
-export const ALL_PRODUCTS: Product[] = [
+const RAW_PRODUCTS: Product[] = [
 
   /* ── CLICKERS ───────────────────────────────────────── */
   {
@@ -118,6 +119,7 @@ export const ALL_PRODUCTS: Product[] = [
     featured:    true,
     inStock:     true,
     searchTags:  ["clicker", "fidget", "cafe", "coffee", "taza", "llavero", "kawaii"],
+    hidden:      true,
   },
   {
     id:          17,
@@ -136,6 +138,7 @@ export const ALL_PRODUCTS: Product[] = [
     featured:    true,
     inStock:     true,
     searchTags:  ["clicker", "fidget", "teclas", "keyboard", "mecanico", "tech"],
+    hidden:      true,
   },
   {
     id:          18,
@@ -293,6 +296,9 @@ export const ALL_PRODUCTS: Product[] = [
   },
 
 ];
+
+/** Productos visibles en la tienda (excluye los marcados como hidden: true) */
+export const ALL_PRODUCTS: Product[] = RAW_PRODUCTS.filter((p) => !p.hidden);
 
 /* ── Helpers ────────────────────────────────────────────── */
 
