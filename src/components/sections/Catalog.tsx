@@ -65,26 +65,42 @@ function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number })
               </span>
             </div>
           )}
+          {/* Código interno */}
+          {p.code && (
+            <span
+              className="absolute top-3 left-3 text-[10px] font-black px-2 py-1 rounded-full"
+              style={{
+                background: "rgba(255,255,255,0.9)",
+                color: "#0A0A0A",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              #{p.code}
+            </span>
+          )}
           {/* Price badge */}
-          {p.price && (
-            <div className="absolute top-3 left-3 flex items-center gap-1.5">
-              <span
-                className="text-xs font-black px-2.5 py-1 rounded-full"
-                style={{
-                  background: hovered ? "#0A0A0A" : "#FFE500",
-                  color: hovered ? color : "#0A0A0A",
-                  border: "1.5px solid #0A0A0A",
-                }}
-              >
-                S/ {p.salePrice ?? p.price}
-              </span>
-              {p.salePrice && (
-                <span className="text-[10px] font-bold line-through px-1.5 py-0.5 rounded"
-                  style={{ background: "rgba(0,0,0,0.10)", color: "#0A0A0A" }}>
-                  S/ {p.price}
-                </span>
-              )}
-            </div>
+          {p.price ? (
+            <span
+              className="absolute top-3 right-3 text-xs font-black px-2.5 py-1 rounded-full"
+              style={{
+                background: hovered ? "#0A0A0A" : "#FFE500",
+                color: hovered ? color : "#0A0A0A",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              S/ {p.price}
+            </span>
+          ) : (
+            <span
+              className="absolute top-3 right-3 text-[10px] font-black px-2.5 py-1 rounded-full text-center"
+              style={{
+                background: "#0A0A0A",
+                color: hovered ? color : "#FFE500",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              Eventos y merch
+            </span>
           )}
         </div>
 

@@ -97,36 +97,41 @@ function ProductCard({
               </span>
             </div>
           )}
+          {/* Código interno */}
+          {product.code && (
+            <span
+              className="absolute top-3 left-3 text-[10px] font-black px-2 py-1 rounded-full"
+              style={{
+                background: "rgba(255,255,255,0.9)",
+                color: "#0A0A0A",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              #{product.code}
+            </span>
+          )}
           {/* Badge precio */}
           {product.price ? (
-            <div className="absolute top-3 left-3 flex items-center gap-1.5">
-              <span
-                className="text-xs font-black px-2.5 py-1 rounded-full"
-                style={{
-                  background: isActive ? "#0A0A0A" : "#FFE500",
-                  color: isActive ? color : "#0A0A0A",
-                  border: "1.5px solid #0A0A0A",
-                }}
-              >
-                S/ {product.salePrice ?? product.price}
-              </span>
-              {product.salePrice && (
-                <span className="text-[10px] font-bold line-through px-1.5 py-0.5 rounded"
-                  style={{ background: "rgba(0,0,0,0.10)", color: "#0A0A0A" }}>
-                  S/ {product.price}
-                </span>
-              )}
-            </div>
+            <span
+              className="absolute top-3 right-3 text-xs font-black px-2.5 py-1 rounded-full"
+              style={{
+                background: isActive ? "#0A0A0A" : "#FFE500",
+                color: isActive ? color : "#0A0A0A",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              S/ {product.price}
+            </span>
           ) : (
             <span
-              className="absolute top-3 left-3 text-xs font-black px-2.5 py-1 rounded-full"
+              className="absolute top-3 right-3 text-[10px] font-black px-2.5 py-1 rounded-full"
               style={{
                 background: "#0A0A0A",
                 color: isActive ? color : "#FFE500",
                 border: "1.5px solid #0A0A0A",
               }}
             >
-              Cotizar
+              Eventos y merch
             </span>
           )}
 
@@ -190,9 +195,10 @@ function DetailPanel({
   product: Product;
   onClose: () => void;
 }) {
-  const displayPrice = product.salePrice ?? product.price;
   const waMessage = encodeURIComponent(
-    `Hola! Me interesa el producto: *${product.name}*${displayPrice ? ` (S/ ${displayPrice})` : ""}. ¿Podría darme más información? 😊`
+    product.price
+      ? `Hola! Me interesa el producto: *${product.name}* (S/ ${product.price}). ¿Podría darme más información? 😊`
+      : `Hola! Me interesa el producto: *${product.name}* para un evento o como merch. ¿Podrían darme más información? 😊`
   );
   const waUrl = `https://wa.me/51959297226?text=${waMessage}`;
 
@@ -287,18 +293,11 @@ function DetailPanel({
           >
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-[#0A0A0A]/60">
-                {product.salePrice ? "Precio de lanzamiento 🚀" : "Precio por unidad"}
+                {product.price ? "Precio por unidad" : "Eventos y merch"}
               </p>
-              {product.salePrice ? (
-                <div className="flex items-baseline gap-2">
-                  <p className="font-bold text-3xl text-[#0A0A0A]">S/ {product.salePrice}</p>
-                  <p className="font-bold text-base line-through text-[#0A0A0A]/50">S/ {product.price}</p>
-                </div>
-              ) : (
-                <p className="font-bold text-3xl text-[#0A0A0A]">
-                  {product.price ? `S/ ${product.price}` : "A cotizar"}
-                </p>
-              )}
+              <p className="font-bold text-3xl text-[#0A0A0A]">
+                {product.price ? `S/ ${product.price}` : "Contáctanos"}
+              </p>
             </div>
             <span className="text-2xl">✦</span>
           </div>
@@ -319,7 +318,7 @@ function DetailPanel({
             <MessageCircle size={18} />
             {product.price
               ? `Consultar por WhatsApp · S/ ${product.price}`
-              : "Cotizar por WhatsApp"}
+              : "Contáctanos para eventos y merch"}
           </motion.a>
         </div>
       </div>

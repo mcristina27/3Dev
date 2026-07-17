@@ -25,8 +25,7 @@ export interface Product {
   images:      string[];       // URLs de imágenes (primera = principal)
                                // usa "/products/nombre.jpg" para imágenes propias
                                // o URLs de Unsplash mientras tanto
-  price:       number | null;  // precio en soles (S/). null = "cotizar"
-  salePrice?:  number;         // precio de oferta (tachado el original)
+  price:       number | null;  // precio en soles (S/). null = "contáctanos" (eventos / merch)
   shortDesc:   string;         // descripción corta para la card del home
   description: string;         // descripción completa para la página de detalle
   material:    string;         // material(es) disponibles
@@ -102,26 +101,6 @@ export const CATEGORIES: Category[] = [
 const RAW_PRODUCTS: Product[] = [
 
   /* ── CLICKERS ───────────────────────────────────────── */
-  {
-    id:          16,
-    name:        "Clicker MiniCoffee",
-    category:    "clickers",
-    images:      ["/assets/products/clicker-coffe.png"],
-    price:       8,
-    salePrice:   7,
-    shortDesc:   "Clicker con forma de taza de café. También disponible como llavero.",
-    description: "Clicker articulado en forma de taza de café con espuma. Viene en versión clicker de escritorio o como llavero para llevar a todos lados.",
-    material:    "PLA Premium",
-    colors:      ["Crema / Marrón", "Rosa"],
-    size:        "5 × 5 cm",
-    weight:      "35 g",
-    time:        "3–5 días hábiles",
-    tag:         "Clicker",
-    featured:    true,
-    inStock:     true,
-    searchTags:  ["clicker", "fidget", "cafe", "coffee", "taza", "llavero", "kawaii"],
-    hidden:      true,
-  },
   {
     id:          17,
     name:        "Clicker Teclas",
@@ -208,7 +187,7 @@ const RAW_PRODUCTS: Product[] = [
     name:        "Llavero GitHub",
     category:    "accesorios",
     images:      ["/assets/products/keychain-github.png"],
-    price:       3,
+    price:       4,
     shortDesc:   "Llavero con el Octocat de GitHub. Blanco y negro, edición dev.",
     description: "Llavero con el icónico Octocat de GitHub en negro y blanco. Hecho en PLA bicolor. El accesorio indispensable para cualquier dev.",
     material:    "PLA bicolor",
@@ -247,7 +226,7 @@ const RAW_PRODUCTS: Product[] = [
     name:        "Llavero DinoChrome",
     category:    "accesorios",
     images:      ["/assets/products/keychain-dino.png"],
-    price:       3,
+    price:       4,
     shortDesc:   "Llavero con dinosaurio kawaii. Ideal para llevar a todos lados.",
     description: "Llavero con dinosaurio kawaii impreso en 3D. Pequeño, resistente y adorable. Disponible en varios colores.",
     material:    "PLA",
@@ -267,7 +246,7 @@ const RAW_PRODUCTS: Product[] = [
     name:        "Llavero AudiClaud",
     category:    "accesorios",
     images:      ["/assets/products/keychain-audiclaud.png"],
-    price:       3,
+    price:       6,
     shortDesc:   "Llavero de Claudio con audífonos. Para los devs que programan con música.",
     description: "Llavero con el mascot Claudio usando audífonos grandes en azul. Impreso en PLA naranja, compacto y resistente. Perfecto para los devs que no programan sin música.",
     material:    "PLA",
@@ -286,7 +265,7 @@ const RAW_PRODUCTS: Product[] = [
     name:        "Llavero HeartClaud",
     category:    "accesorios",
     images:      ["/assets/products/keychain-heartclaud.png"],
-    price:       3,
+    price:       6,
     shortDesc:   "Llavero de Claudio con un corazón. El regalo tierno para cualquier dev.",
     description: "Llavero con el mascot Claudio y un corazón rosa pixel-art. Impreso en PLA naranja, compacto y resistente. Ideal como detalle o regalo.",
     material:    "PLA",
