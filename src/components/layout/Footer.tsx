@@ -38,7 +38,7 @@ export default function Footer() {
             <span className="font-bold text-lg text-white">3Dev</span>
           </Link>
           <p className="text-sm text-white/50 leading-relaxed max-w-xs">
-            Impresiones 3D únicas hechas con amor y filamento premium.
+            Impresiones 3D para devs & tech lovers.
             Cada pieza, pensada para vos.
           </p>
           <div className="flex items-center gap-2">
