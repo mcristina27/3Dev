@@ -39,7 +39,7 @@ export default function Footer() {
           </Link>
           <p className="text-sm text-white/50 leading-relaxed max-w-xs">
             Impresiones 3D para devs & tech lovers.
-            Cada pieza, pensada para vos.
+            Cada pieza, pensada para ti.
           </p>
           <div className="flex items-center gap-2">
             {socials.map(({ icon, label, href }) => (

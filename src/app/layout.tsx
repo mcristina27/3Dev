@@ -12,9 +12,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "3Dev — Impresiones 3D con Amor",
+  title: "3Dev Labs",
   description:
-    "Tienda de impresiones 3D únicas: figuras, decoración, accesorios y más. Cada pieza hecha con amor y filamento premium.",
+    "Tienda de impresiones 3D únicas hecha por developers para developers.",
 };
 
 export const viewport: Viewport = {

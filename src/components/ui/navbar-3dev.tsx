@@ -17,9 +17,10 @@ const catalogItems = [
 ];
 
 const navLinks = [
-  { title: "Productos", href: "/catalogo" },
-  { title: "Nosotros",  href: "/#nosotros" },
-  { title: "Contacto",  href: "/#contacto" },
+  { title: "Productos",  href: "/catalogo" },
+  { title: "Nosotros",   href: "/#nosotros" },
+  { title: "Conócenos",  href: "/conocenos" },
+  { title: "Contacto",   href: "/#contacto" },
 ];
 
 export function Navbar3Dev() {
