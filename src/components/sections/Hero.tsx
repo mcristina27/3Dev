@@ -84,13 +84,6 @@ export default function Hero() {
             >
               Ver productos <ArrowRight size={15} />
             </Link>
-            <Link
-              href="/#contacto"
-              className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white transition-all"
-              style={{ border: "2px solid #0A0A0A" }}
-            >
-              Cotizar pieza
-            </Link>
           </motion.div>
 
           {/* Stats */}

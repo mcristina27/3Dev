@@ -112,15 +112,6 @@ export function Navbar3Dev() {
                 </Link>
               ))}
             </div>
-
-            {/* CTA */}
-            <Link
-              href="/#contacto"
-              className="px-5 py-2 rounded-full text-sm font-bold bg-[#0A0A0A] text-white hover:bg-[#FFE500] hover:text-[#0A0A0A] transition-colors"
-              style={{ border: "2px solid #0A0A0A" }}
-            >
-              Cotizar →
-            </Link>
           </nav>
 
           {/* ── Mobile ── */}
@@ -197,15 +188,6 @@ export function Navbar3Dev() {
                 ))}
               </div>
 
-              <div className="p-4" style={{ borderTop: "2px solid #0A0A0A" }}>
-                <Link
-                  href="/#contacto"
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-center w-full py-3 rounded-full font-bold text-sm bg-[#0A0A0A] text-white"
-                >
-                  Cotizar →
-                </Link>
-              </div>
             </motion.div>
           </>
         )}

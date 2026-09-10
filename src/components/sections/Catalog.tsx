@@ -65,19 +65,8 @@ function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number })
               </span>
             </div>
           )}
-          {/* Price badge */}
-          {p.price ? (
-            <span
-              className="absolute top-3 right-3 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{
-                background: hovered ? "#0A0A0A" : "#FFE500",
-                color: hovered ? color : "#0A0A0A",
-                border: "1.5px solid #0A0A0A",
-              }}
-            >
-              S/ {p.price}
-            </span>
-          ) : (
+          {/* Price badge (oculto: no mostramos precios en la tienda) */}
+          {!p.price && (
             <span
               className="absolute top-3 right-3 text-[10px] font-black px-2.5 py-1 rounded-full text-center"
               style={{
