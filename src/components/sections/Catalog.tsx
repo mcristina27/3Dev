@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import { ALL_PRODUCTS, CATEGORIES } from "@/data/products";
 import { useState } from "react";
+import { useSeasonal } from "@/context/SeasonalContext";
 
 /* 8 productos = 2 filas × 4 cols en desktop */
 const GRID_PRODUCTS = ALL_PRODUCTS.slice(0, 8);
@@ -19,10 +20,11 @@ const HOVER_COLORS = [
 
 function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number }) {
   const [hovered, setHovered] = useState(false);
+  const { onProductClick } = useSeasonal();
   const color = HOVER_COLORS[index % HOVER_COLORS.length];
 
   return (
-    <Link href="/catalogo" className="block h-full">
+    <Link href="/catalogo" className="block h-full" onClick={() => onProductClick(p)}>
       <div
         className="flex flex-col rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 h-full"
         style={{
@@ -65,8 +67,19 @@ function ProductCard({ p, index }: { p: typeof ALL_PRODUCTS[0]; index: number })
               </span>
             </div>
           )}
-          {/* Price badge (oculto: no mostramos precios en la tienda) */}
-          {!p.price && (
+          {/* Badge precio */}
+          {p.price ? (
+            <span
+              className="absolute top-3 right-3 text-xs font-black px-2.5 py-1 rounded-full"
+              style={{
+                background: hovered ? "#0A0A0A" : "#FFE500",
+                color: hovered ? color : "#0A0A0A",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              S/ {p.price}
+            </span>
+          ) : (
             <span
               className="absolute top-3 right-3 text-[10px] font-black px-2.5 py-1 rounded-full text-center"
               style={{

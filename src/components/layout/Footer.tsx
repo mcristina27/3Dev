@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Logo3Dev } from "@/components/ui/Logo3Dev";
-import { MessageCircle, Mail, AtSign } from "lucide-react";
+import { Mail, AtSign } from "lucide-react";
 
 const links = {
   catalogo: [
@@ -21,7 +21,6 @@ const links = {
 
 const socials = [
   { icon: <AtSign size={16} />, label: "Instagram", href: "https://www.instagram.com/3dev_labs" },
-  { icon: <MessageCircle size={16} />, label: "WhatsApp", href: "https://wa.me/51959297226" },
   { icon: <Mail size={16} />, label: "Email", href: "mailto:hola@3dev.pe" },
 ];
 

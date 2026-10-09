@@ -4,11 +4,12 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, X, ShoppingBag,
-  MessageCircle,
   ChevronRight,
   ArrowRight,
+  AtSign,
 } from "lucide-react";
 import Link from "next/link";
+import { useSeasonal } from "@/context/SeasonalContext";
 import { Navbar3Dev } from "@/components/ui/navbar-3dev";
 import Footer from "@/components/layout/Footer";
 import {
@@ -97,8 +98,19 @@ function ProductCard({
               </span>
             </div>
           )}
-          {/* Badge precio (oculto: no mostramos precios en la tienda) */}
-          {!product.price && (
+          {/* Badge precio */}
+          {product.price ? (
+            <span
+              className="absolute top-3 right-3 text-xs font-black px-2.5 py-1 rounded-full"
+              style={{
+                background: isActive ? "#0A0A0A" : "#FFE500",
+                color: isActive ? color : "#0A0A0A",
+                border: "1.5px solid #0A0A0A",
+              }}
+            >
+              S/ {product.price}
+            </span>
+          ) : (
             <span
               className="absolute top-3 right-3 text-[10px] font-black px-2.5 py-1 rounded-full"
               style={{
@@ -171,12 +183,6 @@ function DetailPanel({
   product: Product;
   onClose: () => void;
 }) {
-  const waMessage = encodeURIComponent(
-    product.price
-      ? `Hola! Me interesa el producto: *${product.name}*. ¿Podría darme más información? 😊`
-      : `Hola! Me interesa el producto: *${product.name}* para un evento o como merch. ¿Podrían darme más información? 😊`
-  );
-  const waUrl = `https://wa.me/51959297226?text=${waMessage}`;
 
   return (
     <div
@@ -262,41 +268,36 @@ function DetailPanel({
               </div>
             )}
 
-          {/* Precio (oculto: no mostramos precios en la tienda) */}
-          {!product.price && (
-            <div
-              className="rounded-xl p-4 flex items-center justify-between"
-              style={{ border: "2px solid #0A0A0A", background: "#FFE500" }}
-            >
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-[#0A0A0A]/60">
-                  Eventos y merch
-                </p>
-                <p className="font-bold text-3xl text-[#0A0A0A]">
-                  Contáctanos
-                </p>
-              </div>
-              <span className="text-2xl">✦</span>
+          {/* Precio */}
+          <div
+            className="rounded-xl p-4 flex items-center justify-between"
+            style={{ border: "2px solid #0A0A0A", background: "#FFE500" }}
+          >
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-widest text-[#0A0A0A]/60">
+                {product.price ? "Precio por unidad" : "Eventos y merch"}
+              </p>
+              <p className="font-bold text-3xl text-[#0A0A0A]">
+                {product.price ? `S/ ${product.price}` : "Contáctanos"}
+              </p>
             </div>
-          )}
+            <span className="text-2xl">✦</span>
+          </div>
 
-          {/* WhatsApp CTA */}
+          {/* Instagram CTA */}
           <motion.a
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.01 }}
-            href={waUrl}
+            href="https://www.instagram.com/3dev_labs"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2.5 py-4 rounded-full font-black text-sm text-white"
-            style={{
-              background: "linear-gradient(135deg, #25D366, #1DA851)",
-              boxShadow: "0 4px 20px rgba(37,211,102,0.30)",
-            }}
+            className="flex items-center justify-center gap-2.5 py-4 rounded-full font-black text-sm bg-[#0A0A0A] text-[#FFE500]"
+            style={{ border: "2px solid #0A0A0A" }}
           >
-            <MessageCircle size={18} />
+            <AtSign size={18} />
             {product.price
-              ? "Consultar por WhatsApp"
-              : "Contáctanos para eventos y merch"}
+              ? "Consultar por Instagram"
+              : "Escríbenos para eventos y merch"}
           </motion.a>
         </div>
       </div>
@@ -331,6 +332,7 @@ export default function CatalogoPage() {
   const [selected, setSelected] = useState<Product | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const cols = useColumns();
+  const { onProductClick } = useSeasonal();
 
   /* Filtrado */
   const filtered = useMemo(() => {
@@ -356,6 +358,7 @@ export default function CatalogoPage() {
   }, [filtered, cols]);
 
   function handleSelect(p: Product) {
+    onProductClick(p);
     setSelected((prev) => (prev?.id === p.id ? null : p));
   }
 
@@ -564,13 +567,13 @@ export default function CatalogoPage() {
           Lo hacemos. ✦
         </h2>
         <a
-          href="https://wa.me/51959297226?text=Hola!+Quiero+cotizar+una+pieza+3D+personalizada"
+          href="https://www.instagram.com/3dev_labs"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold bg-[#0A0A0A] text-[#FFE500] hover:bg-white hover:text-[#0A0A0A] transition-colors"
           style={{ border: "2px solid #0A0A0A" }}
         >
-          <MessageCircle size={16} /> Consultar por WhatsApp
+          <AtSign size={16} /> Escríbenos por Instagram
         </a>
       </div>
 
