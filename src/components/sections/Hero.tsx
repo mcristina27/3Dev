@@ -4,10 +4,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import { Model3DViewer } from "@/components/ui/Model3DViewer";
+import { useSeasonal } from "@/context/SeasonalContext";
 
 const tags = ["🎨 Personalizable", "⚡ 24h", "📦 Delivery", "♻️ Eco filament"];
 
 export default function Hero() {
+  const { halloween } = useSeasonal();
   return (
     <section
       className="relative min-h-screen bg-white flex flex-col"
@@ -110,7 +112,11 @@ export default function Hero() {
           className="flex items-center justify-center py-8 lg:py-0"
           style={{ minHeight: 520 }}
         >
-          <Model3DViewer src="/models/obj4-colmillos.glb" height={520} />
+          <Model3DViewer
+            key={halloween ? "hw" : "std"}
+            src={halloween ? "/models/obj4-colmillos.glb" : "/models/obj4.glb"}
+            height={520}
+          />
         </motion.div>
       </div>
     </section>
