@@ -110,7 +110,7 @@ export default function Hero() {
           className="flex items-center justify-center py-8 lg:py-0"
           style={{ minHeight: 520 }}
         >
-          <Model3DViewer src="/models/obj4.glb" height={520} />
+          <Model3DViewer src="/models/obj4-colmillos.glb" height={520} />
         </motion.div>
       </div>
     </section>
